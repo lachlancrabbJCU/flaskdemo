@@ -8,19 +8,19 @@ app.secret_key = 'IT@JCUA0Zr98j/3yXa R~XHH!jmN]LWX/,?RT'
 
 @app.route('/')
 def home():
-    return render_template("home.html")
+    return render_template("home.html", page=wikipedia.page("Home page"))
 
 
 @app.route('/about')
 def about():
-    return "I am still working on this"
+    return render_template("about.html", page=wikipedia.page("Wikipedia:About"))
 
 
 @app.route('/search', methods=['POST', 'GET'])
 def search():
     if request.method == 'POST':
         session['search_term'] = request.form['search']
-        return redirect(url_for('results'))
+        return redirect(url_for('results'))  # Returns URL of results route.
     return render_template("search.html")
 
 
